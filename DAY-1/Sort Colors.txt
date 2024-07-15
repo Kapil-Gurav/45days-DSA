@@ -1,0 +1,32 @@
+import java.util.*;
+
+class Solution {
+    
+    public void sortColors(int[] nums) {
+        int low =0;
+        int mid =0;
+        int high = nums.length - 1;
+        int temp;
+
+        while(mid<=high){
+           if(nums[mid] == 0){
+            //  swap(nums[low], nums[mid]);
+            temp = nums[low];
+            nums[low] = nums[mid];
+            nums [mid] = temp;
+             low++;
+             mid++;
+           }
+           else if(nums[mid] == 1){
+             mid++;
+           }else{
+            //    swap(nums[mid], nums[high]);
+            temp = nums[mid];
+            nums[mid] = nums[high];
+            nums [high] = temp;
+               high--;
+           }
+        }
+        // return nums;
+    }
+}

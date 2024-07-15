@@ -1,0 +1,22 @@
+class Solution {
+    public int findDuplicate(int[] nums) {
+    int duplicate=0;
+    int n= nums.length;
+    int i=0;
+    int j=1;
+    Arrays.sort(nums);
+
+    while(i<j && j<n){
+      if(nums[i]==nums[j]){
+        duplicate = nums[i];
+        return duplicate;
+        // break;
+      }else{
+        i++;
+        j++;
+      }
+    }
+    return duplicate;
+
+    }
+}
