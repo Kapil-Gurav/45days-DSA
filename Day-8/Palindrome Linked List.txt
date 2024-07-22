@@ -1,0 +1,46 @@
+class Solution {
+    public ListNode reverse(ListNode head){
+        ListNode prev = null;
+        ListNode curr = head;
+
+        while(curr != null){
+          ListNode nextNode = curr.next;
+          curr.next = prev;
+
+          prev=curr;
+          curr=nextNode;
+        }
+        return prev;
+    }
+    
+
+    public ListNode findM (ListNode head){
+     ListNode H = head;
+     ListNode T = head;
+
+     while(H.next != null && H.next.next != null){
+         H= H.next.next;
+         T = T.next;
+     }
+     return T;
+    }    
+    public boolean isPalindrome(ListNode head) {
+        if(head==null || head.next==null){
+            return true;
+        }
+
+        ListNode middle = findM(head);
+        ListNode secondHalfStart = reverse(middle.next);
+
+        ListNode firstHS = head;
+        while(secondHalfStart != null){
+            if(firstHS.val != secondHalfStart.val){
+                 return false;
+            }
+            firstHS = firstHS.next;
+            secondHalfStart = secondHalfStart.next;
+        }
+        return true; 
+
+    }
+}
