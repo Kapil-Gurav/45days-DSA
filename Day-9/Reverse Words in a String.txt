@@ -1,0 +1,50 @@
+class Solution {
+
+    private String cleanSpaces(char[] a, int n) {
+        int i = 0, j = 0;
+
+        while (j < n) {
+            while (j < n && a[j] == ' ') j++;             // Skip spaces
+            while (j < n && a[j] != ' ') a[i++] = a[j++]; // Keep non spaces
+            while (j < n && a[j] == ' ') j++;             // Skip spaces
+            if (j < n) a[i++] = ' ';                      // Keep only one space
+        }
+
+        return new String(a).substring(0, i);
+    }
+
+    // Utility method to swap characters in an array
+    private void swap(char[] chs, int i, int j) {
+        char temp = chs[i];
+        chs[i] = chs[j];
+        chs[j] = temp;
+    }
+
+    // Utility method to reverse characters in an array from index s to e
+    private void reverse(char[] chs, int s, int e) {
+        while (s < e) {
+            swap(chs, s, e);
+            s++;
+            e--;
+        }
+    }
+
+    public String reverseWords(String s) {
+        int n = s.length();
+        char[] chars = s.toCharArray();
+
+        // Step 1: Reverse the entire string
+        reverse(chars, 0, n - 1);
+
+        // Step 2: Reverse each word in the reversed string
+        int start = 0;
+        for (int i = 0; i <= n; i++) {
+            if (i == n || chars[i] == ' ') {
+                reverse(chars, start, i - 1);
+                start = i + 1;
+            }
+        }
+
+       return cleanSpaces(chars, n);
+    }
+}
